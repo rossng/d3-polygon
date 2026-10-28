@@ -29,3 +29,10 @@ it("polygonCentroid(polygon) returns the expected value for a very large polygon
   for (let value = stop - step; value >= 0; value -= step) points.push([value, 0]);
   assert.deepStrictEqual(polygonCentroid(points), [49999999.75000187, 49999999.75001216]);
 });
+
+it("polygonCentroid(polygon) returns the expected value for a polygon far from the origin", () => {
+  for (const t of [1e8, 1e10, 1e12]) {
+    assert.deepStrictEqual(polygonCentroid([[t, t], [t, t + 1], [t + 1, t + 1], [t + 1, t]]), [t + 0.5, t + 0.5]);
+    assert.deepStrictEqual(polygonCentroid([[t + 1, t + 1], [t + 3, t + 2], [t + 2, t + 3]]), [t + 2, t + 2]);
+  }
+});

@@ -29,3 +29,10 @@ it("polygonArea(polygon) returns the expected value for a very large polygon", (
   for (let value = stop - step; value >= 0; value -= step) points.push([value, 0]);
   assert.strictEqual(polygonArea(points), 1e16 - 5e7);
 });
+
+it("polygonArea(polygon) returns the expected value for a polygon far from the origin", () => {
+  for (const t of [1e8, 1e10, 1e12]) {
+    assert.strictEqual(polygonArea([[t, t], [t, t + 1], [t + 1, t + 1], [t + 1, t]]), 1);
+    assert.strictEqual(polygonArea([[t + 1, t + 1], [t + 3, t + 2], [t + 2, t + 3]]), -1.5);
+  }
+});
